@@ -14,12 +14,11 @@ describe('ShortenUrlForm tests', () => {
         const urlInput = getByTestId('url-input');
         expect(sendButton).toBeDefined();
         expect(urlInput).toBeDefined();
-        fireEvent.change(urlInput, {target: {value: "http://example.com"}})
+        fireEvent.change(urlInput, { target: { value: 'http://example.com' } });
         fireEvent.click(sendButton);
         await waitFor(() => getByTestId('loading'));
         await waitFor(() => getByTestId('response'));
-        expect(queryByTestId("loading")).toBeNull();
-
+        expect(queryByTestId('loading')).toBeNull();
     });
 
     it('should show error when invalid url is entered', async () => {
@@ -28,11 +27,11 @@ describe('ShortenUrlForm tests', () => {
         const urlInput = getByTestId('url-input');
         expect(sendButton).toBeDefined();
         expect(urlInput).toBeDefined();
-        fireEvent.change(urlInput, {target: {value: "invalid-url"}})
+        fireEvent.change(urlInput, { target: { value: 'invalid-url' } });
         fireEvent.click(sendButton);
         await waitFor(() => getByTestId('error-message'));
-        expect(queryByTestId("response")).toBeNull();
-        expect(queryByTestId("loading")).toBeNull();
+        expect(queryByTestId('response')).toBeNull();
+        expect(queryByTestId('loading')).toBeNull();
     });
 
     it('should disable button when shorten url is loading', async () => {
@@ -41,7 +40,7 @@ describe('ShortenUrlForm tests', () => {
         const urlInput = getByTestId('url-input');
         expect(sendButton).toBeDefined();
         expect(urlInput).toBeDefined();
-        fireEvent.change(urlInput, {target: {value: "http://example.com"}})
+        fireEvent.change(urlInput, { target: { value: 'http://example.com' } });
         fireEvent.click(sendButton);
         await waitFor(() => getByTestId('loading'));
         expect(sendButton).toBeDisabled();

@@ -9,11 +9,11 @@ export default function useShortenUrl() {
 
     const shortenUrl = useCallback(
         async (longUrl) => {
-            if (!longUrl || longUrl === "") {
+            if (!longUrl || longUrl === '') {
                 return null;
             }
-            setErrorMessage("");
-            setResponse("");
+            setErrorMessage('');
+            setResponse('');
 
             if (!validateURL(longUrl)) {
                 setErrorMessage('Please enter a valid URL');

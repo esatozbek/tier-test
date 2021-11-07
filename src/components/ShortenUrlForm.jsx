@@ -33,7 +33,11 @@ const ShortenUrlForm = () => {
     );
 
     return (
-        <form data-testid="url-form" onSubmit={onSubmit} className="formContainer">
+        <form
+            data-testid="url-form"
+            onSubmit={onSubmit}
+            className="formContainer"
+        >
             <label htmlFor="shorten">
                 Url:
                 <input
@@ -52,11 +56,19 @@ const ShortenUrlForm = () => {
                 disabled={loading}
             />
             {response !== '' && (
-                <div data-testid="response" className="info">{response} copied!</div>
+                <div data-testid="response" className="info">
+                    {response} copied!
+                </div>
             )}
-            {loading && <div data-testid="loading" className="info">Loading...</div>}
+            {loading && (
+                <div data-testid="loading" className="info">
+                    Loading...
+                </div>
+            )}
             {errorMessage !== '' && (
-                <div data-testid="error-message" className="info error">{errorMessage}</div>
+                <div data-testid="error-message" className="info error">
+                    {errorMessage}
+                </div>
             )}
         </form>
     );
