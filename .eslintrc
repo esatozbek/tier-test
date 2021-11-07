@@ -2,19 +2,23 @@
   "root": true,
   "parser": "babel-eslint",
   "env": {
-    "browser": true
+    "browser": true,
+    "jest/globals": true
   },
   "extends": [
     "airbnb",
     "prettier"
   ],
   "plugins": [
-    "react-hooks"
+    "react-hooks",
+    "jest"
   ],
   "ignorePatterns": [
     "node_modules/"
   ],
-  "globals": {},
+  "globals": {
+    "jest/globals": true
+  },
   "rules": {},
   "settings": {
     "import/resolver": {

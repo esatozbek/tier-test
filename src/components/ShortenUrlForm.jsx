@@ -1,34 +1,43 @@
 /* eslint no-unused-vars: 1 */
 
 import React, { useCallback, useState } from 'react';
+import useShortenUrl from './ShortenUrlForm.hooks';
+import copyToClipboard from '../utils/copyToClipboard';
+
+import '../css/ShortenUrlForm.css';
 
 const ShortenUrlForm = () => {
     const [value, setValue] = useState('');
+    const { loading, errorMessage, response, shortenUrl } = useShortenUrl();
 
     const onChange = useCallback(
         (e) => {
-            // TODO: Set the component's new state based on the user's input
+            setValue(e.target.value);
         },
-        [
-            /* TODO: Add necessary deps */
-        ],
+        [setValue],
     );
 
     const onSubmit = useCallback(
-        (e) => {
+        async (e) => {
             e.preventDefault();
-            // TODO: shorten url and copy to clipboard
+            const link = await shortenUrl(value);
+            if (link) {
+                try {
+                    await copyToClipboard(link);
+                } catch (error) {
+                    // ignored
+                }
+            }
         },
-        [
-            /* TODO: necessary deps */
-        ],
+        [value],
     );
 
     return (
-        <form onSubmit={onSubmit}>
+        <form data-testid="url-form" onSubmit={onSubmit} className="formContainer">
             <label htmlFor="shorten">
                 Url:
                 <input
+                    data-testid="url-input"
                     placeholder="Url to shorten"
                     id="shorten"
                     type="text"
@@ -36,9 +45,19 @@ const ShortenUrlForm = () => {
                     onChange={onChange}
                 />
             </label>
-            <input type="submit" value="Shorten and copy URL" />
-            {/* TODO: show below only when the url has been shortened and copied */}
-            <div>{/* Show shortened url --- copied! */}</div>
+            <input
+                data-testid="send-form"
+                type="submit"
+                value="Shorten and copy URL"
+                disabled={loading}
+            />
+            {response !== '' && (
+                <div data-testid="response" className="info">{response} copied!</div>
+            )}
+            {loading && <div data-testid="loading" className="info">Loading...</div>}
+            {errorMessage !== '' && (
+                <div data-testid="error-message" className="info error">{errorMessage}</div>
+            )}
         </form>
     );
 };
