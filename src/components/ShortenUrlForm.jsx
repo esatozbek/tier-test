@@ -1,5 +1,3 @@
-/* eslint no-unused-vars: 1 */
-
 import React, { useCallback, useState } from 'react';
 import useShortenUrl from './ShortenUrlForm.hooks';
 import copyToClipboard from '../utils/copyToClipboard';
